@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="Services\Hangfire\Hangfire.csproj" />
     <ProjectReference Include="ToDoList.Domain\ToDoList.Domain.csproj" />
   </ItemGroup>
 
