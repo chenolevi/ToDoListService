@@ -10,8 +10,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <Compile Remove="ToDoList.Domain\**" />
+    <Content Remove="Services\**" />
+    <Content Remove="ToDoList.Domain\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <EmbeddedResource Remove="ToDoList.Domain\**" />
+    <None Remove="Services\**" />
+    <None Remove="ToDoList.Domain\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="ToDoList.Domain\ToDoList.Domain.csproj" />
   </ItemGroup>
 
 </Project>
