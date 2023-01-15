@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using ToDoList.Database.Sql;
 using ToDoList.Domain;
 
 namespace ToDoListService
@@ -9,6 +10,7 @@ namespace ToDoListService
             IConfiguration configuration)
         {
             services.AddToDoListDomain()
+                    .AddToDoListDal(configuration)
                     .AddHangfire(configuration);
             return services;
         }

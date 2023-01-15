@@ -9,9 +9,9 @@ namespace ToDoList.Domain.Interfaces
     public interface IToDoListLogic
     {
         Task<IEnumerable<Models.GetAllTasksResponse>> GetAll();
-        Task<Models.Task> Get(string id);
-        Task<string> Add(Models.Task task);
-        Task Update(string id, Models.Task task);
-        Task Delete(string id);
+        Task<Models.Task> Get(Guid id);
+        Guid Add(Models.Task task);
+        void Update(Guid id, Models.Task task);
+        void Delete(Guid id);
     }
 }

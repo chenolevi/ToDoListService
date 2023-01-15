@@ -27,27 +27,28 @@ namespace ToDoListService.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ToDoList.Domain.Models.Task> Get(string id)
+        public async Task<ToDoList.Domain.Models.Task> Get(Guid id)
         {
             return await _toDoListLogic.Get(id);
         }
 
         [HttpPost()]
-        public async Task<string> Post([FromBody] ToDoList.Domain.Models.Task task)
+        public async Task<Guid> Post([FromBody] ToDoList.Domain.Models.Task task)
         {
-            return await _toDoListLogic.Add(task);
+            var taskId = _toDoListLogic.Add(task);
+            return taskId;
         }
 
         [HttpPut("{id}")]
-        public async Task Put(string id, [FromBody] ToDoList.Domain.Models.Task task)
+        public async Task Put(Guid id, [FromBody] ToDoList.Domain.Models.Task task)
         {
-            await _toDoListLogic.Update(id, task);
+            _toDoListLogic.Update(id, task);
         }
 
         [HttpDelete("{id}")]
-        public async Task Delete(string id)
+        public async Task Delete(Guid id)
         {
-            await _toDoListLogic.Delete(id);
+            _toDoListLogic.Delete(id);
         }
     }
 }

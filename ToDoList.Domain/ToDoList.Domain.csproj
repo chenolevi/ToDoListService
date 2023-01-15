@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.32" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Services\ToDoList.Database.Sql.Abstraction\ToDoList.Database.Sql.Abstraction.csproj" />
     <ProjectReference Include="..\Services\ToDoList.Enums\ToDoList.Enums.csproj" />
   </ItemGroup>
 

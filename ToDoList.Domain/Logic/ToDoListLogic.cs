@@ -1,8 +1,12 @@
-﻿using System;
+﻿using AutoMapper;
+using Hangfire;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoList.Database.Sql.Abstraction;
 using ToDoList.Domain.Interfaces;
 using ToDoList.Domain.Models;
 
@@ -10,29 +14,48 @@ namespace ToDoList.Domain.Logic
 {
     internal class ToDoListLogic : IToDoListLogic
     {
-        public Task<string> Add(Models.Task task)
+        private readonly IToDoListContainer _dal;
+        private readonly IMapper _mapper;
+
+        public ToDoListLogic(IToDoListContainer dal,
+            IMapper mapper) 
         {
-            throw new NotImplementedException();
+            _dal = dal;
+            _mapper = mapper;
         }
 
-        public System.Threading.Tasks.Task Delete(string id)
+        public Guid Add(Models.Task task)
         {
-            throw new NotImplementedException();
+            var newTask = _mapper.Map<Database.Sql.Abstraction.dtoModels.Task>(task);
+            newTask.Id = Guid.NewGuid();
+            BackgroundJob.Enqueue<IToDoListContainer>(dal => dal.AddTask(newTask));
+            return newTask.Id;
         }
 
-        public Task<Models.Task> Get(string id)
+        public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            BackgroundJob.Enqueue<IToDoListContainer>(dal => dal.DeleteTask(id));
         }
 
-        public Task<IEnumerable<GetAllTasksResponse>> GetAll()
+        public async Task<Models.Task> Get(Guid id)
         {
-            throw new NotImplementedException();
+            var task = await _dal.GetTask(id);
+            var mappedTask = _mapper.Map<Models.Task>(task);
+            return mappedTask;
         }
 
-        public System.Threading.Tasks.Task Update(string id, Models.Task task)
+        public async Task<IEnumerable<GetAllTasksResponse>> GetAll()
         {
-            throw new NotImplementedException();
+            var tasks = await _dal.GetTasks();
+            var mappedTasks = _mapper.Map<IEnumerable<GetAllTasksResponse>>(tasks);
+            return mappedTasks;
+        }
+
+        public void Update(Guid id, Models.Task task)
+        {
+            var mappedTasks = _mapper.Map<Database.Sql.Abstraction.dtoModels.Task>(task);
+            mappedTasks.Id= id;
+            BackgroundJob.Enqueue<IToDoListContainer>(dal => dal.UpdateTask(id, mappedTasks));
         }
     }
 }
