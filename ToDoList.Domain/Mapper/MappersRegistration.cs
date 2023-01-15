@@ -8,9 +8,9 @@ namespace ToDoList.Domain.Mapper
         public MappersRegistration()
         {
             CreateMap<Database.Sql.Abstraction.dtoModels.Task, Models.Task>();
-            CreateMap<Database.Sql.Abstraction.dtoModels.Task, Models.GetAllTasksResponse>();
+            CreateMap<Database.Sql.Abstraction.dtoModels.Task, Models.GetTaskResponse>();
             CreateMap<Models.Task, Database.Sql.Abstraction.dtoModels.Task>();
-            CreateMap<Models.GetAllTasksResponse, Database.Sql.Abstraction.dtoModels.Task>();
+            CreateMap<Models.GetTaskResponse, Database.Sql.Abstraction.dtoModels.Task>();
         }
     }
 }

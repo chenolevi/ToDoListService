@@ -8,8 +8,8 @@ namespace ToDoList.Domain.Interfaces
 {
     public interface IToDoListLogic
     {
-        Task<IEnumerable<Models.GetAllTasksResponse>> GetAll();
-        Task<Models.Task> Get(Guid id);
+        Task<IEnumerable<Models.GetTaskResponse>> GetAll();
+        Task<Models.GetTaskResponse> Get(Guid id);
         Guid Add(Models.Task task);
         void Update(Guid id, Models.Task task);
         void Delete(Guid id);

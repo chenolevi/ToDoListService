@@ -20,7 +20,7 @@ namespace ToDoList.Domain.Models
         public Status Status { get; set; }
     }
 
-    public class GetAllTasksResponse: Task
+    public class GetTaskResponse: Task
     {
         public string Id { get; set; }
         public DateTime DateTimeCreation { get; set; }

@@ -37,17 +37,17 @@ namespace ToDoList.Domain.Logic
             BackgroundJob.Enqueue<IToDoListContainer>(dal => dal.DeleteTask(id));
         }
 
-        public async Task<Models.Task> Get(Guid id)
+        public async Task<Models.GetTaskResponse> Get(Guid id)
         {
             var task = await _dal.GetTask(id);
-            var mappedTask = _mapper.Map<Models.Task>(task);
+            var mappedTask = _mapper.Map<GetTaskResponse>(task);
             return mappedTask;
         }
 
-        public async Task<IEnumerable<GetAllTasksResponse>> GetAll()
+        public async Task<IEnumerable<GetTaskResponse>> GetAll()
         {
             var tasks = await _dal.GetTasks();
-            var mappedTasks = _mapper.Map<IEnumerable<GetAllTasksResponse>>(tasks);
+            var mappedTasks = _mapper.Map<IEnumerable<GetTaskResponse>>(tasks);
             return mappedTasks;
         }
 

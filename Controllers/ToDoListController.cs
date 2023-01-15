@@ -21,13 +21,13 @@ namespace ToDoListService.Controllers
         }
 
         [HttpGet()]
-        public async Task<IEnumerable<GetAllTasksResponse>>Get()
+        public async Task<IEnumerable<GetTaskResponse>>Get()
         {
             return await _toDoListLogic.GetAll();
         }
 
         [HttpGet("{id}")]
-        public async Task<ToDoList.Domain.Models.Task> Get(Guid id)
+        public async Task<ToDoList.Domain.Models.GetTaskResponse> Get(Guid id)
         {
             return await _toDoListLogic.Get(id);
         }
