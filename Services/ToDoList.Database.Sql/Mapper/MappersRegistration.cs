@@ -14,6 +14,7 @@ namespace ToDoList.Database.Sql.Mapper
             CreateMap<Abstraction.dtoModels.Task, DatabaseTables.Task>()
                 .ForPath(dest => dest.StatusId, opt => opt.MapFrom(src => src.Status))
                 .ForPath(dest => dest.PriorityId, opt => opt.MapFrom(src => src.Priority))
+                .ForMember(x => x.DateTimeCreation, opt => opt.Ignore())
                 .ForMember(x => x.Status, opt => opt.Ignore())
                 .ForMember(x => x.Priority, opt => opt.Ignore());
 

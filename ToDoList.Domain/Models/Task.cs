@@ -14,7 +14,6 @@ namespace ToDoList.Domain.Models
         [StringLength(250)]
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime? DateTimeCreation { get; set; }
         [EnumDataType(typeof(Priority), ErrorMessage = "Invalid priority")]
         public Priority Priority { get; set; }
         [EnumDataType(typeof(Status), ErrorMessage = "Invalid status")]
@@ -24,5 +23,6 @@ namespace ToDoList.Domain.Models
     public class GetAllTasksResponse: Task
     {
         public string Id { get; set; }
+        public DateTime DateTimeCreation { get; set; }
     }
 }
